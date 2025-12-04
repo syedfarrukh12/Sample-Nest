@@ -1,13 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
+import { DashboardService } from 'src/modules/dashboard/dashboard.service';
 
 @Controller({ path: 'public', version: '1' })
 export class PublicController {
+  constructor(private readonly dashboardService: DashboardService) {}
+
   @Get()
-  getPublicInfo() {
-    return {
-      message: 'This is a public endpoint',
-      version: 'v1',
-      timestamp: new Date().toISOString(),
-    };
+  // No guard since it's public
+  getDashboards() {
+    return this.dashboardService.getDashboard();
   }
 }
